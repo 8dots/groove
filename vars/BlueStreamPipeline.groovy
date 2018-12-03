@@ -1,3 +1,6 @@
+#!/usr/bin/env groovy
+import hudson.model.*
+
 def call() {
   node {
     stage('Checkout') {
