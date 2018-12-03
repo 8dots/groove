@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
 import hudson.model.*
+jenkins = Jenkins.instance
+
 def call() {
   node(jenkins-build-slave) {
     def p = pipelineCfg()
