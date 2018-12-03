@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 import hudson.model.*
-def label = "jenkins-slave-${UUID.randomUUID().toString()}"
-def call(String label, code) {
+def call(String label, yaml, code) {
   podTemplate(label: label, yaml:
   """
   apiVersion: v1
