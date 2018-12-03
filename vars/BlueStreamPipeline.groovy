@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 import hudson.model.*
 
-def call() {
+def call(String label) {
   podTemplate(label: label, yaml:
   """
   apiVersion: v1
