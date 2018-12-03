@@ -3,7 +3,7 @@ import hudson.model.*
 jenkins = Jenkins.instance
 
 def call() {
-  node(jenkins-build-slave) {
+  node('jenkins-build-slave') {
     def p = pipelineCfg()
     if (p.runTests == true) {
       stage('Unit-Testing') {
