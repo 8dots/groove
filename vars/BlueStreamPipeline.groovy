@@ -2,7 +2,7 @@
 import hudson.model.*
 
 def call() {
-  node {
+  node(label) {
     def p = pipelineCfg()
     if (p.runTests == true) {
       stage('Unit-Testing') {

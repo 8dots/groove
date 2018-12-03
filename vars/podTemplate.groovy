@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
-def label = "jenkins-build-slave-${UUID.randomUUID().toString()}"
-def call() {
+
+def call(String label, code) {
   podTemplate(label: label, yaml:
   """
   apiVersion: v1
@@ -24,5 +24,7 @@ def call() {
   volumes: 
     - name: docker-graph-storage 
       emptyDir: {}
-  """)
-}
+  """) {
+  code() 
+  }
+}  
