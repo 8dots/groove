@@ -4,9 +4,10 @@ jenkins = Jenkins.instance
 
 def call() {
   node('jenkins-build-slave') {
-    stage ('checkout') {
+    stage('checkout') {
       checkout scm
     }
+    def p = pipelineCfg()
     if (p.runTests == true) {
       stage('Unit-Testing') {
         container('jenkins-build-slave') {
