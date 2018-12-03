@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 import hudson.model.*
-def call(label) {
-  podTemplate(label: label, yaml:
+def call() {
+  podTemplate(label: jenkins-build-slave, yaml:
   """
   apiVersion: v1
   kind: Pod
