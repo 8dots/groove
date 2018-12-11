@@ -15,7 +15,7 @@ def call() {
               string(credentialsId: 'ACRUSER', variable: 'ACRUSER'), 
               string(credentialsId: 'S3_ENDPOINT', variable: 'S3_ENDPOINT'), 
               string(credentialsId: 'ACRPASS', variable: 'ACRPASS'), 
-              string(credentialsId: 'S3_SECRET_ACCESS_KEY', variable: '	S3_SECRET_ACCESS_KEY'), 
+              string(credentialsId: 'S3_SECRET_ACCESS_KEY', variable: 'S3_SECRET_ACCESS_KEY'), 
               string(credentialsId: 'S3_ACCESS_KEY_ID', variable: 'S3_ACCESS_KEY_ID'), 
               string(credentialsId: 'BS_RMQ_SERVER', variable: 'RMQ_SERVER'),
               string(credentialsId: 'ACR_ENDPOINT', variable: 'ACR_ENDPOINT'), 
