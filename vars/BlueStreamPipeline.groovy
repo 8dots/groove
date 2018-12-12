@@ -22,7 +22,7 @@ def call() {
               string(credentialsId: 'BS_DB_SERVER', variable: 'DB_SERVER'),
               string(credentialsId: 'S3_REGION', variable: 'S3_REGION'),
               string(credentialsId: 'S3_VERSION', variable: 'S3_VERSION'),
-              string(credentialsId: 'RMQ_LOGGER_HOST', variable: 'RMQ_LOGGER_HOST'),
+              string(credentialsId: 'BS_RMQ_SERVER', variable: 'RMQ_LOGGER_HOST'),
               string(credentialsId: 'S3_BUCKET', variable: 'S3_BUCKET')
               ]) {    
             checkout scm
