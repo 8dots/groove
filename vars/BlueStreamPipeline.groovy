@@ -23,7 +23,9 @@ def call() {
               string(credentialsId: 'S3_REGION', variable: 'S3_REGION'),
               string(credentialsId: 'S3_VERSION', variable: 'S3_VERSION'),
               string(credentialsId: 'BS_RMQ_SERVER', variable: 'RMQ_LOGGER_HOST'),
-              string(credentialsId: 'S3_BUCKET', variable: 'S3_BUCKET')
+              string(credentialsId: 'S3_BUCKET', variable: 'S3_BUCKET'),
+              string(credentialsId: 'RMQ_PASSWORD', variable: 'RMQ_PASSWORD'),
+              string(credentialsId: 'RMQ_USERNAME', variable: 'RMQ_USERNAME')
               ]) {    
             checkout scm
             GitShortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
