@@ -11,7 +11,7 @@ def call() {
     if (p.runTests == true) {
       stage('Unit-Testing') {
         container('jenkins-build-slave') {
-          withCredentials([
+          // withCredentials([
             sh "echo debug"
             //   string(credentialsId: 'ACRUSER', variable: 'ACRUSER'), 
             //   string(credentialsId: 'ACRPASS', variable: 'ACRPASS'), 
@@ -23,7 +23,7 @@ def call() {
             // sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
             // sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} ."
             // sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
-          }
+          // }
         }
       }
     }
