@@ -18,8 +18,9 @@ def call() {
               string(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
               ]) {    
             checkout scm
-            GitShortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-            sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
+            sh "echo $ACR_ENDPOINT"
+            // GitShortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+            // sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
             // sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} ."
             // sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
           }
