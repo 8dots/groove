@@ -12,13 +12,13 @@ def call() {
       stage('Unit-Testing') {
         container('jenkins-build-slave') {
           withCredentials([
-              string(credentialsId: 'ACRUSER', variable: 'ACRUSER'), 
-              string(credentialsId: 'ACRPASS', variable: 'ACRPASS'), 
-              string(credentialsId: 'ACR_ENDPOINT', variable: 'ACR_ENDPOINT'), 
-              // string(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
+              // string(credentialsId: 'ACRUSER', variable: 'ACRUSER'), 
+              // string(credentialsId: 'ACRPASS', variable: 'ACRPASS'), 
+              // string(credentialsId: 'ACR_ENDPOINT', variable: 'ACR_ENDPOINT'), 
+              string(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
               ]) {    
             checkout scm
-            sh "echo $ACR_ENDPOINT"
+            sh "echo $BS_CONFIG"
             // GitShortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
             // sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
             // sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} ."
