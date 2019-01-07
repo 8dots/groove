@@ -15,7 +15,7 @@ def call() {
               string(credentialsId: 'ACRUSER', variable: 'ACRUSER'), 
               string(credentialsId: 'ACRPASS', variable: 'ACRPASS'), 
               string(credentialsId: 'ACR_ENDPOINT', variable: 'ACR_ENDPOINT'), 
-              string(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
+              // string(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
               ]) {    
             checkout scm
             sh "echo $ACR_ENDPOINT"
