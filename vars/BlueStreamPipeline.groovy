@@ -8,7 +8,7 @@ def call() {
       checkout scm
     }
     def p = pipelineCfg()
-    // if (p.runTests == true) {
+    if (p.runTests == true) {
       stage('Unit-Testing') {
         container('jenkins-build-slave') {
           withCredentials([
