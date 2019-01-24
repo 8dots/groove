@@ -24,7 +24,7 @@ def call() {
             sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
             if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
               sh "echo push tested image to repo"
-              sh "docker push -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}" 
+              sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}" 
             }
           }
         }
