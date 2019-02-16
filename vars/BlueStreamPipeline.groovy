@@ -22,11 +22,10 @@ def call() {
             sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
             sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} ."
             sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
-            // if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
-            //   sh "echo push tested image to repo"
-            //   sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}"
-            //   sh "helm list"
-            // }
+            if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
+              sh "echo push tested image to repo"
+              sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}"
+            }
           }
         }
       }
@@ -39,8 +38,6 @@ def call() {
               file(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
               ]) {             
             if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
-              sh "echo push tested image to repo"
-              sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}"
               sh "helm list"
             }
           }        
