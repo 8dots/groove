@@ -38,7 +38,7 @@ def call() {
               file(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
               ]) {             
             if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
-              sh "helm list"
+              sh "sudo helm list"
             }
           }        
         }
