@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 import hudson.model.*
 jenkins = Jenkins.instance
-namespaces = ['default', 'ron', 'almog', 'yuval', 'itamar']
 
 def call() {
   node('jenkins-build-slave') {
@@ -25,26 +24,9 @@ def call() {
             sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
             if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
               sh "echo push tested image to repo"
-              sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}"
+              sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}" 
             }
           }
-        }
-      }
-      stage('deploy') {
-        node('master') {  
-          withCredentials([
-              string(credentialsId: 'ACRUSER', variable: 'ACRUSER'), 
-              string(credentialsId: 'ACRPASS', variable: 'ACRPASS'), 
-              string(credentialsId: 'ACR_ENDPOINT', variable: 'ACR_ENDPOINT'), 
-              file(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
-              ]) {             
-            if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
-              for (name in namespaces) {
-                sh "helm list |grep "blue-stream-video-[0-9]"|grep ${name}| awk '{print\$1}'"
-                sh "helm upgrade --install ${name} ${p.repoName} --set ${p.repoName}.image.tag=${GitShortCommit}"
-              }
-            }
-          }        
         }
       }
     }
