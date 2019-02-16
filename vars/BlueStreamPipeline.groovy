@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 import hudson.model.*
 jenkins = Jenkins.instance
+namespaces = ['default', 'ron', 'almog', 'yuval', 'itamar']
 
 def call() {
   node('jenkins-build-slave') {
@@ -38,7 +39,10 @@ def call() {
               file(credentialsId: 'BS_CONFIG', variable: 'BS_CONFIG')
               ]) {             
             if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
-              sh "helm list"
+              for (name in namespaces {
+                sh "helm list |grep "blue-stream-video-[0-9]"|grep ${name}| awk '{print$1}'"
+                sh "helm upgrade --install ${name} ${p.repoName} --set ${p.repoName}.image.tag=${GitShortCommit}"
+              }
             }
           }        
         }
