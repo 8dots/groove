@@ -22,7 +22,12 @@ def call() {
             GitShortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
             sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
             sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} ."
-            sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
+            if (p.repoName == 'blue-stream/blue-stream-client' && p.deployUponTestSuccess == true) {
+              sh "echo No tests for the client side"  
+            }
+            else { 
+              sh "docker run --env-file $BS_CONFIG $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} npm test"
+            }
             if (env.BRANCH_NAME == 'master' && p.deployUponTestSuccess == true) {
               sh "echo push tested image to repo"
               sh "docker push $ACR_ENDPOINT/${p.repoName}:${GitShortCommit}"
