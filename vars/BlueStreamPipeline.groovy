@@ -21,7 +21,7 @@ def call() {
             checkout scm
             GitShortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
             sh "docker login $ACR_ENDPOINT -u $ACRUSER -p $ACRPASS"
-            sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} ."
+            sh "docker build -t $ACR_ENDPOINT/${p.repoName}:${GitShortCommit} -f test.Dockerfile ."
             if (p.repoName == 'blue-stream/blue-stream-client' && p.deployUponTestSuccess == true) {
               sh "echo No tests for the client side"  
             }
